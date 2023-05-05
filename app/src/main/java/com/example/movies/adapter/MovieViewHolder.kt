@@ -1,11 +1,14 @@
 package com.example.movies.adapter
 
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.movies.MovieDetailFragment
 import com.example.movies.R
 import com.example.movies.databinding.ItemMovieBinding
 import com.example.movies.models.Movie
@@ -27,11 +30,15 @@ class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         Glide.with(moviePoster).load(IMAGE_BASE + movie.poster).into(moviePoster)
 
         itemView.setOnClickListener{
-            Toast.makeText(
-                moviePoster.context,
-                movie.title,
-                Toast.LENGTH_LONG
-            ).show()
+            val fragment = MovieDetailFragment()
+            val bundle = Bundle()
+            bundle.putInt("movieId", movie.id!!) // Pasamos el id de la película como argumento al Fragment
+            fragment.arguments = bundle
+            val transaction = (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+
         }
     }
 

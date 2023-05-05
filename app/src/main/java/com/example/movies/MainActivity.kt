@@ -14,7 +14,7 @@ import com.example.movies.services.MovieAPIService
 import retrofit2.Call
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MovieAdapter.OnMovieClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private var topMoviesMutableList: MutableList<Movie> = mutableListOf()
@@ -22,21 +22,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var topMoviesAdapter: MovieAdapter
     private lateinit var carteleraMoviesAdapter: MovieAdapter
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.etFilter.addTextChangedListener { userFilter ->
             val topMoviesFiltered = topMoviesMutableList.filter {
-                    movie -> movie.title!!.toLowerCase().contains(userFilter.toString())
+                    movie -> movie.title!!.toLowerCase().contains(userFilter.toString().toLowerCase())
             }
             topMoviesAdapter.updateMovie(topMoviesFiltered)
 
             val carteleraMoviesFiltered = carteleraMoviesMutableList.filter {
-                    movie -> movie.title!!.toLowerCase().contains(userFilter.toString())
+                    movie -> movie.title!!.toLowerCase().contains(userFilter.toString().toLowerCase())
             }
             carteleraMoviesAdapter.updateMovie(carteleraMoviesFiltered)
         }
@@ -46,8 +45,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerViews() {
-        topMoviesAdapter = MovieAdapter(movies = topMoviesMutableList)
-        carteleraMoviesAdapter = MovieAdapter(movies = carteleraMoviesMutableList)
+        topMoviesAdapter = MovieAdapter(movies = topMoviesMutableList, onMovieClickListener = this)
+        carteleraMoviesAdapter = MovieAdapter(movies = carteleraMoviesMutableList, onMovieClickListener = this)
 
         binding.rvTopMoviesList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -102,5 +101,15 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun onMovieClick(movieId: Int) {
+        val movieDetailFragment = MovieDetailFragment()
+        val bundle = Bundle()
+        bundle.putInt("movieId", movieId)
+        movieDetailFragment.arguments = bundle
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, movieDetailFragment)
+            .addToBackStack(null)
+            .commit()
+    }
 }
