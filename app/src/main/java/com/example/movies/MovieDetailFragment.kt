@@ -63,6 +63,60 @@ class MovieDetailFragment : Fragment() {
             binding.movieOverviewTextView.text = movie.overview
             binding.movieVoteAverage.text = movie.vote
 
+            val voteAverage: Float = movie.vote!!.toFloat()
+
+            if(voteAverage == 10f){
+                binding.startOne.visibility = View.VISIBLE
+                binding.startTwo.visibility = View.VISIBLE
+                binding.startThree.visibility = View.VISIBLE
+                binding.startFour.visibility = View.VISIBLE
+                binding.startFive.visibility = View.VISIBLE
+            }else if(voteAverage > 8.5f && voteAverage <= 9f)
+            {
+                binding.startOne.visibility = View.VISIBLE
+                binding.startTwo.visibility = View.VISIBLE
+                binding.startThree.visibility = View.VISIBLE
+                binding.startFour.visibility = View.VISIBLE
+                binding.startFive.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_star_half_24, 0,0, 0)
+                binding.startFive.visibility = View.VISIBLE
+            }
+            else if(voteAverage > 7.5f && voteAverage < 8.5f)
+            {
+                binding.startOne.visibility = View.VISIBLE
+                binding.startTwo.visibility = View.VISIBLE
+                binding.startThree.visibility = View.VISIBLE
+                binding.startFour.visibility = View.VISIBLE
+
+            }
+            else if(voteAverage > 6.5f && voteAverage < 7.5f)
+            {
+                binding.startOne.visibility = View.VISIBLE
+                binding.startTwo.visibility = View.VISIBLE
+                binding.startThree.visibility = View.VISIBLE
+                binding.startFour.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_star_half_24, 0,0, 0)
+                binding.startFour.visibility = View.VISIBLE
+            }
+            else if(voteAverage > 5.5f && voteAverage < 6.5f)
+            {
+                binding.startOne.visibility = View.VISIBLE
+                binding.startTwo.visibility = View.VISIBLE
+                binding.startThree.visibility = View.VISIBLE
+            }
+            else if(voteAverage > 4.5f && voteAverage < 5.5f)
+            {
+                binding.startOne.visibility = View.VISIBLE
+                binding.startTwo.visibility = View.VISIBLE
+                binding.startThree.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_star_half_24, 0,0, 0)
+                binding.startThree.visibility = View.VISIBLE
+            }
+            else if(voteAverage > 3.5f && voteAverage < 5.5f)
+            {
+                binding.startOne.visibility = View.VISIBLE
+                binding.startTwo.visibility = View.VISIBLE
+            }
+
+
+
             Glide.with(requireContext()).load("https://image.tmdb.org/t/p/w500${movie.backdrop}")
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)

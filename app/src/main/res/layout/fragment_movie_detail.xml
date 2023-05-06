@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
@@ -28,11 +28,58 @@
 
     <TextView
         android:id="@+id/movieVoteAverage"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
         tools:text="9.81" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+
+        >
+        <TextView
+            android:id="@+id/startOne"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/baseline_star_24"
+            />
+        <TextView
+            android:id="@+id/startTwo"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/baseline_star_24"
+            />
+
+        <TextView
+            android:id="@+id/startThree"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/baseline_star_24"
+            />
+
+        <TextView
+
+            android:id="@+id/startFour"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/baseline_star_24"
+            />
+
+        <TextView
+            android:id="@+id/startFive"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/baseline_star_24"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/movieOverviewTextView"

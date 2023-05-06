@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnMovieClickListener {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Thread.sleep(1000)
+        Thread.sleep(3000)
 
         screenSplash.setKeepOnScreenCondition{
             false
@@ -121,5 +121,6 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnMovieClickListener {
             .replace(R.id.fragment_container, movieDetailFragment)
             .addToBackStack(null)
             .commit()
+
     }
 }

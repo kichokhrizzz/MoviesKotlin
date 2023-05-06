@@ -19,7 +19,7 @@ data class MovieModel(
     val vote: String?,
 
     @SerializedName("backdrop_path")
-    val  backdrop: String?,
+    val backdrop: String?,
 
     @SerializedName("overview")
     val overview: String?,
