@@ -3,6 +3,7 @@ package com.example.movies
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.adapter.MovieAdapter
@@ -23,10 +24,20 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnMovieClickListener {
     private lateinit var carteleraMoviesAdapter: MovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val screenSplash = installSplashScreen()
+
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Thread.sleep(1000)
+
+        screenSplash.setKeepOnScreenCondition{
+            false
+        }
+
 
         binding.etFilter.addTextChangedListener { userFilter ->
             val topMoviesFiltered = topMoviesMutableList.filter {
