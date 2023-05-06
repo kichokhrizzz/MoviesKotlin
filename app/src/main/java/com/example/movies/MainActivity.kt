@@ -2,14 +2,13 @@ package com.example.movies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.adapter.MovieAdapter
 import com.example.movies.databinding.ActivityMainBinding
-import com.example.movies.models.Movie
-import com.example.movies.models.MovieResponse
+import com.example.movies.data.model.MovieModel
+import com.example.movies.data.model.MovieProvider
 import com.example.movies.services.MovieAPIInterface
 import com.example.movies.services.MovieAPIService
 import retrofit2.Call
@@ -18,8 +17,8 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity(), MovieAdapter.OnMovieClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private var topMoviesMutableList: MutableList<Movie> = mutableListOf()
-    private var carteleraMoviesMutableList: MutableList<Movie> = mutableListOf()
+    private var topMoviesMutableList: MutableList<MovieModel> = mutableListOf()
+    private var carteleraMoviesMutableList: MutableList<MovieModel> = mutableListOf()
     private lateinit var topMoviesAdapter: MovieAdapter
     private lateinit var carteleraMoviesAdapter: MovieAdapter
 
@@ -71,42 +70,42 @@ class MainActivity : AppCompatActivity(), MovieAdapter.OnMovieClickListener {
             adapter = carteleraMoviesAdapter
         }
 
-        getTopMoviesData { movies: List<Movie> ->
+        getTopMoviesData { movies: List<MovieModel> ->
             topMoviesMutableList.clear()
             topMoviesMutableList.addAll(movies)
             topMoviesAdapter.notifyDataSetChanged()
         }
 
-        getCarteleraMoviesData { movies: List<Movie> ->
+        getCarteleraMoviesData { movies: List<MovieModel> ->
             carteleraMoviesMutableList.clear()
             carteleraMoviesMutableList.addAll(movies)
             carteleraMoviesAdapter.notifyDataSetChanged()
         }
     }
 
-    private fun getTopMoviesData(callback: (List<Movie>) -> Unit) {
+    private fun getTopMoviesData(callback: (List<MovieModel>) -> Unit) {
         val apiService = MovieAPIService.getInstance().create(MovieAPIInterface::class.java)
-        apiService.getTopMovieList().enqueue(object : retrofit2.Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>){
+        apiService.getTopMovieList().enqueue(object : retrofit2.Callback<MovieProvider> {
+            override fun onResponse(call: Call<MovieProvider>, response: Response<MovieProvider>){
 
                 return callback(response.body()!!.movies)
             }
 
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+            override fun onFailure(call: Call<MovieProvider>, t: Throwable) {
                 TODO("Not yet implemented")
             }
 
         })
     }
 
-    private fun getCarteleraMoviesData(callback: (List<Movie>) -> Unit) {
+    private fun getCarteleraMoviesData(callback: (List<MovieModel>) -> Unit) {
         val apiService = MovieAPIService.getInstance().create(MovieAPIInterface::class.java)
-        apiService.getCarteleraMovieList().enqueue(object : retrofit2.Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+        apiService.getCarteleraMovieList().enqueue(object : retrofit2.Callback<MovieProvider> {
+            override fun onResponse(call: Call<MovieProvider>, response: Response<MovieProvider>) {
                 return callback(response.body()!!.movies)
             }
 
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+            override fun onFailure(call: Call<MovieProvider>, t: Throwable) {
                 TODO("Not yet implemented")
             }
         })

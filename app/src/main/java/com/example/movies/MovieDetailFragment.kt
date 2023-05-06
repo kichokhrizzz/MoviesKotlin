@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.movies.databinding.FragmentMovieDetailBinding
-import com.example.movies.models.Movie
+import com.example.movies.data.model.MovieModel
 import com.example.movies.services.MovieAPIInterface
 import com.example.movies.services.MovieAPIService
 import retrofit2.Call
@@ -41,8 +41,8 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun getMovieById(id: Int) {
-        apiService.getMovieById(id).enqueue(object : Callback<Movie> {
-            override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+        apiService.getMovieById(id).enqueue(object : Callback<MovieModel> {
+            override fun onResponse(call: Call<MovieModel>, response: Response<MovieModel>) {
                 if (response.isSuccessful && response.body() != null) {
                     val movie = response.body()
                     updateViews(movie)
@@ -51,13 +51,13 @@ class MovieDetailFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<Movie>, t: Throwable) {
+            override fun onFailure(call: Call<MovieModel>, t: Throwable) {
                 Toast.makeText(context, "Error al obtener la película.", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun updateViews(movie: Movie?) {
+    private fun updateViews(movie: MovieModel?) {
         if (movie != null) {
             binding.movieTitleTextView.text = movie.title
             binding.movieOverviewTextView.text = movie.overview

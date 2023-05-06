@@ -1,20 +1,15 @@
 package com.example.movies.adapter
 
-import com.example.movies.adapter.MovieViewHolder
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.movies.R
-import com.example.movies.models.Movie
-import org.w3c.dom.Text
+
+import com.example.movies.data.model.MovieModel
 
 
 class MovieAdapter(
-    private var movies: List<Movie>,
+    private var movies: List<MovieModel>,
     private val onMovieClickListener: OnMovieClickListener
 
 ) : RecyclerView.Adapter<MovieViewHolder>() {
@@ -36,7 +31,7 @@ class MovieAdapter(
         }
     }
 
-    fun updateMovie(movies: List<Movie>) {
+    fun updateMovie(movies: List<MovieModel>) {
         this.movies = movies
         notifyDataSetChanged()
     }

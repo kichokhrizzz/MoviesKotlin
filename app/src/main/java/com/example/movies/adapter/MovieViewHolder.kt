@@ -2,16 +2,13 @@ package com.example.movies.adapter
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.MovieDetailFragment
 import com.example.movies.R
 import com.example.movies.databinding.ItemMovieBinding
-import com.example.movies.models.Movie
+import com.example.movies.data.model.MovieModel
 
 class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -23,7 +20,7 @@ class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val movieRate = binding.movieVoteAverage
     val moviePoster = binding.moviePoster
 
-    fun render(movie: Movie) {
+    fun render(movie: MovieModel) {
         movieTitle.text = movie.title
         movieRate.text = movie.vote
 
