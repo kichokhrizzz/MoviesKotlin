@@ -61,7 +61,6 @@ class MovieDetailFragment : Fragment() {
         if (movie != null) {
             binding.movieTitleTextView.text = movie.title
             binding.movieOverviewTextView.text = movie.overview
-            binding.movieVoteAverage.text = movie.vote
 
             val voteAverage: Float = movie.vote!!.toFloat()
 

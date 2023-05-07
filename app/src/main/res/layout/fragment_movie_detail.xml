@@ -26,13 +26,7 @@
         android:textSize="38dp"
         tools:text="TITULO" />
 
-    <TextView
-        android:id="@+id/movieVoteAverage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="8dp"
-        tools:text="9.81" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
